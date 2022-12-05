@@ -1,0 +1,97 @@
+﻿@page
+@model ProjectManagement.Pages.Projects2.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section scripts {
+    <script type="text/javascript">
+        function AlertId(id){
+            alert('Projekto id: ' + id);
+        }
+    </script>
+    }
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Filtravimas pagal projekto pavadinima:
+                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="submit" value="Filtuoti" class="btn btn-primary" /> |
+                <a asp-page="./Index">Back to full List</a>
+            </p>
+        </div>
+    </form>
+<table class="table">
+   
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].PlannedStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].PlannedEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].ActualStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].ActualEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].ProjectDescription)
+            </th>
+            <th>
+                PlannedTime (Dienomis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Project) {
+            if (Model != null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlannedStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlannedEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActualStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActualEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectDescription)
+                    </td>
+                    <td>
+                        @{
+                            int parameterValue = item.PlannedProjectTime(item.PlannedStartDate, item.PlannedEndDate);
+                        }
+                        @Html.DisplayFor(modelItem => parameterValue)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>  |
+                        <input class="button" type="button" onclick="AlertId(@item.Id)" value="Rodyti projekto id" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

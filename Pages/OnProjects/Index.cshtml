@@ -1,0 +1,89 @@
+﻿@page
+@model ProjectManagement.Pages.OnProjects2.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section scripts {
+    <script type="text/javascript">
+        function AlertId(id) {
+            alert('Objekto id: ' + id);
+        }
+    </script>
+    }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].DateStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].DateEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].IsClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].IsPartner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].ClientPartner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnProject[0].Project)
+            </th>
+            <th>
+                PartnershipTime (Dienomis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OnProject) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPartner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientPartner.CpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.ProjectDescription)
+            </td>
+            <td>
+                @{
+                    int parameterValue = item.PartnershipTime(item.DateStart);
+                 }
+                @Html.DisplayFor(modelItem => parameterValue)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                <input class="button" type="button" onclick="AlertId(@item.Id)" value="Rodyti objekto id" />
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

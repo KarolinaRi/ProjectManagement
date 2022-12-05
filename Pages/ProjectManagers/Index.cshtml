@@ -1,0 +1,50 @@
+﻿@page
+@model ProjectManagement.Pages.ProjectManagers2.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section scripts {
+    <script type="text/javascript">
+        function AlertId(id) {
+            alert('Objekto id: ' + id);
+        }
+    </script>
+    }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectManager[0].Project)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectManager[0].Employee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ProjectManager) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <input class="button" type="button" onclick="AlertId(@item.Id)" value="Rodyti projekto id" />
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

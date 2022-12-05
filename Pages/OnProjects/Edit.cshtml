@@ -1,0 +1,65 @@
+﻿@page
+@model ProjectManagement.Pages.OnProjects2.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>OnProject</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OnProject.Id" />
+            <div class="form-group">
+                <label asp-for="OnProject.ProjectId" class="control-label"></label>
+                <select asp-for="OnProject.ProjectId" class="form-control" asp-items="ViewBag.ProjectId"></select>
+                <span asp-validation-for="OnProject.ProjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OnProject.ClientPartnerId" class="control-label"></label>
+                <select asp-for="OnProject.ClientPartnerId" class="form-control" asp-items="ViewBag.ClientPartnerId"></select>
+                <span asp-validation-for="OnProject.ClientPartnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OnProject.DateStart" class="control-label"></label>
+                <input asp-for="OnProject.DateStart" class="form-control" />
+                <span asp-validation-for="OnProject.DateStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OnProject.DateEnd" class="control-label"></label>
+                <input asp-for="OnProject.DateEnd" class="form-control" />
+                <span asp-validation-for="OnProject.DateEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OnProject.IsClient" /> @Html.DisplayNameFor(model => model.OnProject.IsClient)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OnProject.IsPartner" /> @Html.DisplayNameFor(model => model.OnProject.IsPartner)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OnProject.Description" class="control-label"></label>
+                <input asp-for="OnProject.Description" class="form-control" />
+                <span asp-validation-for="OnProject.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
